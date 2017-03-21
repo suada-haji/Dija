@@ -27,4 +27,22 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.2.0'
+
+    // rxjava/android
+    compile 'io.reactivex:rxandroid:1.2.1'
+
+    // retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+
+    // dagger
+    compile 'com.google.dagger:dagger:2.8'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+
+    // test
+    testCompile "org.mockito:mockito-core:1.10.19"
+
+
 }
