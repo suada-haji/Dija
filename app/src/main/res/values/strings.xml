@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dija Application</string>
+    <string name="fetch_error">Couldn\'t load books.</string>
+    <string name="movies_empty_state">No books found.</string>
 </resources>
