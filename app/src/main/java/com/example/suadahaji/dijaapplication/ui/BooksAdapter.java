@@ -1,7 +1,9 @@
 package com.example.suadahaji.dijaapplication.ui;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.suadahaji.dijaapplication.R;
+import com.example.suadahaji.dijaapplication.dagger.BooksApplication;
 import com.example.suadahaji.dijaapplication.models.Book;
 import com.squareup.picasso.Picasso;
 
@@ -19,6 +22,7 @@ import java.util.ArrayList;
  */
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>{
+    private static final String TAG = "BooksAdapter";
 
     private ArrayList<Book> books;
     int rowLayout;
@@ -44,6 +48,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
             bookAuthor = (TextView) itemView.findViewById(R.id.book_author);
             bookImage = (ImageView) itemView.findViewById(R.id.book_image);
             bookPrice = (TextView) itemView.findViewById(R.id.book_price);
+
+            bookName.setTypeface(BooksApplication.ROBOTO_MEDIUM);
+            bookDescription.setTypeface(BooksApplication.ROBOTO_REGULAR);
+            bookAuthor.setTypeface(BooksApplication.LATO_REGULAR);
+            bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
         }
     }
 
@@ -57,8 +66,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     public void onBindViewHolder(BooksAdapter.BooksHolder holder, int position) {
         holder.bookName.setText(books.get(position).getBookName());
         holder.bookDescription.setText(books.get(position).getBookDescription());
-        holder.bookAuthor.setText(books.get(position).getBookAuthor());
-        holder.bookPrice.setText(Double.toString(books.get(position).getBookPrice()));
+        holder.bookAuthor.setText("By " + books.get(position).getBookAuthor());
+        holder.bookPrice.setText("$ " + Double.toString(books.get(position).getBookPrice()));
         Picasso.with(context).load(books.get(position).getBookImage()).into(holder.bookImage);
     }
 

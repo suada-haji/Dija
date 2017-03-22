@@ -35,8 +35,6 @@ public class BooksView extends RelativeLayout implements BooksContract {
 
     private BooksAdapter booksAdapter;
 
-
-
     public BooksView(Context context) {
         this(context, null);
     }
