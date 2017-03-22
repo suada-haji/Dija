@@ -37,10 +37,6 @@ public class Book {
     @Expose
     private double bookPrice;
 
-    public Book () {
-
-    }
-
     public Book(String bookName, String bookDescription, String bookAuthor, String bookImage, String publishedYear, double bookPrice, double bookRating) {
         this.bookName = bookName;
         this.bookDescription = bookDescription;

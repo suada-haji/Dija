@@ -1,4 +1,4 @@
-package com.example.suadahaji.dijaapplication;
+package com.example.suadahaji.dijaapplication.ui;
 
 import android.content.Intent;
 import android.os.Handler;

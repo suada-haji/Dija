@@ -41,6 +41,7 @@ public class BooksPresenter {
                             booksContract.displayEmptyState();
                         }
                         ArrayList<Book> books = bookResponse.getBooks();
+                        booksContract.onBookResponse(books);
                     }
                 }, new Action1<Throwable>() {
                     @Override
