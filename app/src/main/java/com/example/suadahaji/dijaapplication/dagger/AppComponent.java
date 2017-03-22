@@ -1,6 +1,7 @@
 package com.example.suadahaji.dijaapplication.dagger;
 
 import com.example.suadahaji.dijaapplication.api.ApiModule;
+import com.example.suadahaji.dijaapplication.mvp_books.BooksView;
 
 import dagger.Component;
 
@@ -13,6 +14,8 @@ import dagger.Component;
 @Component(modules = { AppModule.class, ApiModule.class })
 public interface AppComponent {
     void inject(BooksApplication booksApplication);
+
+    void inject(BooksView booksView);
 
     final class Initializer {
         /**

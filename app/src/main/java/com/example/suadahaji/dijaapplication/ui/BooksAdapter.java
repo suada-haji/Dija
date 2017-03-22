@@ -46,9 +46,10 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
             bookPrice = (TextView) itemView.findViewById(R.id.book_price);
         }
     }
+
     @Override
     public BooksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_list_books, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.book_list_view, parent, false);
         return new BooksHolder(view);
     }
 
@@ -59,13 +60,10 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
         holder.bookAuthor.setText(books.get(position).getBookAuthor());
         holder.bookPrice.setText(Double.toString(books.get(position).getBookPrice()));
         Picasso.with(context).load(books.get(position).getBookImage()).into(holder.bookImage);
-
     }
 
     @Override
     public int getItemCount() {
         return books.size();
     }
-
-
 }
