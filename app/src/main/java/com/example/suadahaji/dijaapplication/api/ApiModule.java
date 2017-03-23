@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers;
 @Module
 public class ApiModule {
     @Provides @Singleton @ApiUrl String provideApiUrl() {
-        return "https://gist.githubusercontent.com/andela-shaji/";
+        return "https://gist.githubusercontent.com/anonymous/";
     }
 
     @Provides @Singleton
