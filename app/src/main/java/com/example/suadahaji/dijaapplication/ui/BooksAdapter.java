@@ -23,11 +23,14 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     private static final String TAG = "BooksAdapter";
 
     private ArrayList<Book> books;
-    private final BookListener listener;
+    private BookListener listener;
     int rowLayout;
     Context context;
 
 
+    public BooksAdapter() {
+
+    }
 
     public BooksAdapter(ArrayList<Book> bookArrayList, int rowLayout, Context context, BookListener listener) {
         this.books = bookArrayList;
@@ -59,7 +62,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
 
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
+          int position = getAdapterPosition();
             Book book = books.get(position);
 
             listener.onBookClicked(book);
@@ -68,7 +71,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
 
     @Override
     public BooksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.book_list_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(rowLayout, parent, false);
         return new BooksHolder(view);
     }
 
