@@ -17,43 +17,43 @@ import rx.subscriptions.CompositeSubscription;
  * Created by suadahaji
  */
 
-public class BooksPresenter {
+public class InteractorImpl implements Interactor {
+
     @Inject
     ApiManager apiManager;
 
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
-    private BooksContract booksContract;
+    private LoadListener loadListener;
 
-    public BooksPresenter(ApiManager apiManager, BooksContract contract) {
+    public InteractorImpl(ApiManager apiManager, LoadListener loadListener) {
         this.apiManager = apiManager;
-        this.booksContract = contract;
+        this.loadListener = loadListener;
     }
 
-    void fetchBooks() {
+    @Override
+    public void loadItems() {
         final Observable<BookResponse> bookResponseObservable = apiManager.getBooks();
+
         compositeSubscription.add(bookResponseObservable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<BookResponse>() {
                     @Override
                     public void call(BookResponse bookResponse) {
-                        if (bookResponse == null || bookResponse.getBooks() == null || bookResponse.getBooks().size() == 0) {
-                            booksContract.displayEmptyState();
-                        }
                         ArrayList<Book> books = bookResponse.getBooks();
-                        booksContract.onBookResponse(books);
+                        loadListener.onFinished(books);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        booksContract.displayErrorState();
+                        loadListener.displayErrorState();
                     }
-                }));
+                })
+        );
     }
 
-    void unbind() {
-        compositeSubscription.unsubscribe();
+    @Override
+    public void unbind() {
+
     }
-
-
 }

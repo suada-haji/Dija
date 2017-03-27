@@ -8,8 +8,7 @@ import java.util.ArrayList;
  * Created by suadahaji
  */
 
-public interface BooksContract {
-    void onBookResponse(ArrayList<Book> books);
-    void displayEmptyState();
+public interface LoadListener {
+    void onFinished(ArrayList<Book> books);
     void displayErrorState();
 }

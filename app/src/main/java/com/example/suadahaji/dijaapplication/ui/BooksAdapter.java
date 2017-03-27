@@ -2,11 +2,14 @@ package com.example.suadahaji.dijaapplication.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.suadahaji.dijaapplication.R;
 import com.example.suadahaji.dijaapplication.dagger.BooksApplication;
@@ -23,11 +26,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     private static final String TAG = "BooksAdapter";
 
     private ArrayList<Book> books;
-    private final BookListener listener;
+    private BookListener listener;
     int rowLayout;
     Context context;
-
-
 
     public BooksAdapter(ArrayList<Book> bookArrayList, int rowLayout, Context context, BookListener listener) {
         this.books = bookArrayList;
@@ -36,7 +37,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
         this.listener = listener;
     }
 
-    public class BooksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class BooksHolder extends RecyclerView.ViewHolder {
         TextView bookName;
         TextView bookDescription;
         TextView bookAuthor;
@@ -57,28 +58,29 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
             bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
         }
 
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
-            Book book = books.get(position);
-
-            listener.onBookClicked(book);
+        public void bind(final Book book, final BookListener listener) {
+            bookName.setText(book.getBookName());
+            bookDescription.setText(book.getBookDescription());
+            bookAuthor.setText("By " + book.getBookAuthor());
+            bookPrice.setText("$ " + Double.toString(book.getBookPrice()));
+            Picasso.with(itemView.getContext()).load(book.getBookImage()).into(bookImage);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onBookClicked(book);
+                }
+            });
         }
     }
 
     @Override
     public BooksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.book_list_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(rowLayout, parent, false);
         return new BooksHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BooksAdapter.BooksHolder holder, int position) {
-        holder.bookName.setText(books.get(position).getBookName());
-        holder.bookDescription.setText(books.get(position).getBookDescription());
-        holder.bookAuthor.setText("By " + books.get(position).getBookAuthor());
-        holder.bookPrice.setText("$ " + Double.toString(books.get(position).getBookPrice()));
-        Picasso.with(context).load(books.get(position).getBookImage()).into(holder.bookImage);
+    public void onBindViewHolder(BooksAdapter.BooksHolder holder, final int position) {
+        holder.bind(books.get(position), listener);
     }
 
     @Override
@@ -89,5 +91,4 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     public interface BookListener {
         void onBookClicked(Book book);
     }
-
 }
