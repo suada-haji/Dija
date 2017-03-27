@@ -1,9 +1,7 @@
 package com.example.suadahaji.dijaapplication.ui;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +23,20 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     private static final String TAG = "BooksAdapter";
 
     private ArrayList<Book> books;
+    private final BookListener listener;
     int rowLayout;
     Context context;
 
-    public BooksAdapter(ArrayList<Book> bookArrayList, int rowLayout, Context context) {
+
+
+    public BooksAdapter(ArrayList<Book> bookArrayList, int rowLayout, Context context, BookListener listener) {
         this.books = bookArrayList;
         this.rowLayout = rowLayout;
         this.context = context;
+        this.listener = listener;
     }
 
-    public class BooksHolder extends RecyclerView.ViewHolder {
+    public class BooksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView bookName;
         TextView bookDescription;
         TextView bookAuthor;
@@ -53,6 +55,14 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
             bookDescription.setTypeface(BooksApplication.ROBOTO_REGULAR);
             bookAuthor.setTypeface(BooksApplication.LATO_REGULAR);
             bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Book book = books.get(position);
+
+            listener.onBookClicked(book);
         }
     }
 
@@ -75,4 +85,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     public int getItemCount() {
         return books.size();
     }
+
+    public interface BookListener {
+        void onBookClicked(Book book);
+    }
+
 }
