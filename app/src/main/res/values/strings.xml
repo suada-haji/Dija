@@ -2,4 +2,8 @@
     <string name="app_name">Dija Application</string>
     <string name="fetch_error">Couldn\'t load books.</string>
     <string name="movies_empty_state">No books found.</string>
+    <string name="bookDescription">Artie Deemer lives off his dog Jellyroll, star of movies TV and dog food advertising. In the Edgar-Award finalist Lover Man, Artie becomes a reluctant detective when his ex-girlfriend is killed. In Lush Life, Artie falls for a sexy pool player whose …</string>
+    <string name="bookAuthor">By Dallas Murphy</string>
+    <string name="bookPrice">$ 5.99</string>
+    <string name="bookName">The Complete Deemer</string>
 </resources>

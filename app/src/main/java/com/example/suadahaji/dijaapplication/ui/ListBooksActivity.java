@@ -72,6 +72,11 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     }
 
     @Override
+    public void showEmptyStateMessage() {
+        findViewById(R.id.empty_state).setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onDetachedFromWindow() {
         presenter.detachView();
         super.onDetachedFromWindow();

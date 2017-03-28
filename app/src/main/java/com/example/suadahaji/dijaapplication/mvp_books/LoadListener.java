@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface LoadListener {
     void onFinished(ArrayList<Book> books);
     void displayErrorState();
+    void displayEmptyState();
 }

@@ -15,4 +15,6 @@ public interface MainView {
     void showMessage(Book book);
 
     void showErrorMessage();
+
+    void showEmptyStateMessage();
 }

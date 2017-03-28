@@ -59,5 +59,10 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
 
     }
 
+    @Override
+    public void displayEmptyState() {
+        mainView.showEmptyStateMessage();
+    }
+
 
 }

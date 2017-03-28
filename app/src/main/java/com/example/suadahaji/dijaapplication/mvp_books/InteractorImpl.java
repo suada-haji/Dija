@@ -40,6 +40,9 @@ public class InteractorImpl implements Interactor {
                 .subscribe(new Action1<BookResponse>() {
                     @Override
                     public void call(BookResponse bookResponse) {
+                        if (bookResponse == null || bookResponse.getBooks() == null || bookResponse.getBooks().size() == 0) {
+                            loadListener.displayEmptyState();
+                        }
                         ArrayList<Book> books = bookResponse.getBooks();
                         loadListener.onFinished(books);
                     }
