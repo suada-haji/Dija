@@ -1,5 +1,6 @@
 package com.example.suadahaji.dijaapplication.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +12,8 @@ import com.example.suadahaji.dijaapplication.R;
 import com.example.suadahaji.dijaapplication.api.ApiManager;
 import com.example.suadahaji.dijaapplication.dagger.BooksApplication;
 import com.example.suadahaji.dijaapplication.models.Book;
-import com.example.suadahaji.dijaapplication.mvp_books.MainView;
-import com.example.suadahaji.dijaapplication.mvp_books.PresenterImpl;
+import com.example.suadahaji.dijaapplication.listbooks.MainView;
+import com.example.suadahaji.dijaapplication.listbooks.PresenterImpl;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     private RecyclerView recyclerView;
     private PresenterImpl presenter;
     private BooksAdapter adapter;
+    private Book book;
 
     @Inject
     ApiManager apiManager;
@@ -69,6 +71,20 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     @Override
     public void showErrorMessage() {
         findViewById(R.id.error_state).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showEmptyStateMessage() {
+        findViewById(R.id.empty_state).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void navigateToHome(Book book) {
+
+        Intent intent = new Intent(this, BookDetailActivity.class);
+        intent.putExtra("currentBook", book);
+        this.startActivity(intent);
+        finish();
     }
 
     @Override

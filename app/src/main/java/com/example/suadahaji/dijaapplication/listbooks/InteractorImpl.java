@@ -1,4 +1,4 @@
-package com.example.suadahaji.dijaapplication.mvp_books;
+package com.example.suadahaji.dijaapplication.listbooks;
 
 import com.example.suadahaji.dijaapplication.api.ApiManager;
 import com.example.suadahaji.dijaapplication.models.Book;
@@ -40,6 +40,9 @@ public class InteractorImpl implements Interactor {
                 .subscribe(new Action1<BookResponse>() {
                     @Override
                     public void call(BookResponse bookResponse) {
+                        if (bookResponse == null || bookResponse.getBooks() == null || bookResponse.getBooks().size() == 0) {
+                            loadListener.displayEmptyState();
+                        }
                         ArrayList<Book> books = bookResponse.getBooks();
                         loadListener.onFinished(books);
                     }

@@ -1,4 +1,4 @@
-package com.example.suadahaji.dijaapplication.mvp_books;
+package com.example.suadahaji.dijaapplication.listbooks;
 
 import com.example.suadahaji.dijaapplication.models.Book;
 
@@ -15,4 +15,8 @@ public interface MainView {
     void showMessage(Book book);
 
     void showErrorMessage();
+
+    void showEmptyStateMessage();
+
+    void navigateToHome(Book book);
 }

@@ -1,5 +1,8 @@
 package com.example.suadahaji.dijaapplication.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by suadahaji
  */
 
-public class Book {
+public class Book implements Parcelable {
 
     @SerializedName("book_name")
     @Expose
@@ -102,4 +105,55 @@ public class Book {
     public void setBookPrice(double bookPrice) {
         this.bookPrice = bookPrice;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * In the writeToParcel method write all the class attributes
+     */
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.bookName);
+        dest.writeString(this.bookDescription);
+        dest.writeString(this.bookAuthor);
+        dest.writeString(this.bookImage);
+        dest.writeString(this.publishedYear);
+        dest.writeDouble(this.bookPrice);
+        dest.writeDouble(this.bookRating);
+
+    }
+
+    /**
+     * De-parcel the object(initialise the class attributes) in the constructor
+     */
+    public Book(Parcel in) {
+        this.bookName = in.readString();
+        this.bookDescription = in.readString();
+        this.bookAuthor = in.readString();
+        this.bookImage = in.readString();
+        this.publishedYear = in.readString();
+        this.bookPrice = in.readDouble();
+        this.bookRating = in.readDouble();
+    }
+
+    /**
+     * In the Parcel.Creator read the parcel data
+     */
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel source) {
+            return new Book(source);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+
 }
