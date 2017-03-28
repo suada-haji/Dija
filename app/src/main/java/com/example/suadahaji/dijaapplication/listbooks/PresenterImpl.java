@@ -1,11 +1,9 @@
-package com.example.suadahaji.dijaapplication.mvp_books;
+package com.example.suadahaji.dijaapplication.listbooks;
 
 import com.example.suadahaji.dijaapplication.api.ApiManager;
 import com.example.suadahaji.dijaapplication.models.Book;
 
 import java.util.ArrayList;
-
-import javax.inject.Inject;
 
 /**
  * Created by suadahaji
@@ -44,7 +42,7 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
 
     @Override
     public void onItemSelected(Book book) {
-        mainView.showMessage(book);
+        mainView.navigateToHome(book);
     }
 
 

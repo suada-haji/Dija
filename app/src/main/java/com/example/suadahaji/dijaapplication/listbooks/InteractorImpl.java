@@ -1,4 +1,4 @@
-package com.example.suadahaji.dijaapplication.mvp_books;
+package com.example.suadahaji.dijaapplication.listbooks;
 
 import com.example.suadahaji.dijaapplication.api.ApiManager;
 import com.example.suadahaji.dijaapplication.models.Book;
