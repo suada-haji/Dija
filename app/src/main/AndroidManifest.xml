@@ -23,7 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ListBooksActivity" />
-        <activity android:name=".ui.BookDetailActivity"/>
+        <activity android:name=".ui.BookDetailActivity"
+            android:theme="@style/CustomTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ListBooksActivity"/>
+        </activity>
     </application>
 
 </manifest>
