@@ -36,6 +36,8 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
 
+    compile 'com.jakewharton:butterknife:8.4.0'
+
     // dagger
     compile 'com.google.dagger:dagger:2.8'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
@@ -47,6 +49,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     compile 'com.makeramen:roundedimageview:2.3.0'
+
+    compile 'com.github.florent37:diagonallayout:1.0.4' 
 
 
 }
