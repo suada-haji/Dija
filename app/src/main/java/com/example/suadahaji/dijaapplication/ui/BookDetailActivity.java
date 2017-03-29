@@ -21,6 +21,8 @@ public class BookDetailActivity extends AppCompatActivity {
 
     String bookImageUrl;
 
+    ImageView backButton;
+
 
 
     @Override
@@ -29,23 +31,18 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
 
         bookImage = (ImageView) findViewById(R.id.book_detail_image);
+        backButton = (ImageView) findViewById(R.id.back_button);
 
         Book book = getIntent().getParcelableExtra("currentBook");
 
-      //  manageToolBar();
-
-
-       /* if (null != toolbar) {
-            toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  //  NavUtils.navigateUpFromSameTask(BookDetailActivity.this);
-                    startActivity(new Intent(BookDetailActivity.this, ListBooksActivity.class));
-                    finish();
-                }
-            });
-        }*/
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookDetailActivity.this, ListBooksActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         bookImageUrl = book.getBookImage();

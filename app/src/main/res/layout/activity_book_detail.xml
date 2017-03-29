@@ -29,7 +29,19 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/back_button"
+            />
+
     </com.github.florent37.diagonallayout.DiagonalLayout>
+
+
 
     <TextView
         android:id="@+id/book_description"
