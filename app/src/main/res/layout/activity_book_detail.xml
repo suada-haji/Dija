@@ -22,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <ImageView
+        <com.flaviofaria.kenburnsview.KenBurnsView
 
             android:id="@+id/book_detail_image"
             android:layout_width="match_parent"
