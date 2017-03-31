@@ -10,7 +10,7 @@ import rx.Observable;
  */
 
 public interface ApiManager {
-    @GET("3b0561062271123653f7569fbb941e20/raw/210ee4e48272eb3531b64a4eb4aa211ec647314a/6420cfdb-0af0-11e7-a0ba-d3c0c8656989.json")
+    @GET("0c4c72a73e401c624122e6f9e6bb5929/raw/ec1f931e108908c388e0c4419354f3448658f81b/blob.json")
     Observable<BookResponse> getBooks();
 
 }
