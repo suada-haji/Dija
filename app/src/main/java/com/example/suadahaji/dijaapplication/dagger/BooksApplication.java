@@ -12,6 +12,8 @@ public class BooksApplication extends Application {
     public static Typeface ROBOTO_MEDIUM;
     public static Typeface ROBOTO_REGULAR;
     public static Typeface LATO_REGULAR;
+    public static Typeface LATO_BOLD;
+    public static Typeface LATO_LIGHT;
 
 
     @Override
@@ -31,5 +33,7 @@ public class BooksApplication extends Application {
         ROBOTO_MEDIUM = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
         ROBOTO_REGULAR = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         LATO_REGULAR = Typeface.createFromAsset(getAssets(), "fonts/Lato-Regular.ttf");
+        LATO_BOLD = Typeface.createFromAsset(getAssets(), "fonts/Lato-Bold.ttf");
+        LATO_LIGHT = Typeface.createFromAsset(getAssets(), "fonts/Lato-Light.ttf");
     }
 }
