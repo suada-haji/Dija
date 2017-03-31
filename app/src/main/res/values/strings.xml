@@ -8,4 +8,6 @@
     <string name="bookName">The Complete Deemer</string>
     <string name="description">Description</string>
     <string name="book_date">20 Nov 2013</string>
+    <string name="author_annotate">"By "</string>
+    <string name="price_annotate">"$ "</string>
 </resources>

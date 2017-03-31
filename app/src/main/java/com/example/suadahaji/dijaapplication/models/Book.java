@@ -1,10 +1,14 @@
 package com.example.suadahaji.dijaapplication.models;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * Created by suadahaji
@@ -75,6 +79,18 @@ public class Book implements Parcelable {
     }
 
     public String getPublishedYear() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+
+        try {
+            date = format.parse(publishedYear);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        publishedYear = dateFormat.format(date);
+
         return publishedYear;
     }
 
