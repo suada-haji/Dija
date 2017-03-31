@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +20,9 @@ import com.example.suadahaji.dijaapplication.listbooks.PresenterImpl;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+
+import static com.example.suadahaji.dijaapplication.ui.Transitions.EXTRA_TRANSITION;
+import static com.example.suadahaji.dijaapplication.ui.Transitions.TRANSITION_SLIDE_RIGHT;
 
 public class ListBooksActivity extends AppCompatActivity implements MainView, BooksAdapter.BookListener {
 
@@ -44,6 +49,8 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
         presenter.attachedView(this);
 
         setupRecyclerView();
+
+
     }
 
     private void setupRecyclerView() {
@@ -84,7 +91,10 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
 
         Intent intent = new Intent(this, BookDetailActivity.class);
         intent.putExtra("currentBook", book);
-        this.startActivity(intent);
+        intent.putExtra(
+                EXTRA_TRANSITION, TRANSITION_SLIDE_RIGHT);
+        Transitions transitions = new Transitions();
+        transitions.startActivityWithOptions(this, intent, this);
         finish();
     }
 
@@ -97,5 +107,11 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     @Override
     public void onBookClicked(Book book) {
         presenter.onItemSelected(book);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAfterTransition();
+        super.onBackPressed();
     }
 }

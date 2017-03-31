@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.graphics.Palette;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +24,9 @@ import com.squareup.picasso.Target;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.suadahaji.dijaapplication.ui.Transitions.EXTRA_TRANSITION;
+import static com.example.suadahaji.dijaapplication.ui.Transitions.TRANSITION_SLIDE_RIGHT;
 
 public class BookDetailActivity extends AppCompatActivity {
 
@@ -63,6 +68,15 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
 
         ButterKnife.bind(this);
+
+        String transition = getIntent().getStringExtra(EXTRA_TRANSITION);
+        switch (transition) {
+            case TRANSITION_SLIDE_RIGHT:
+                Transition transitionSlideRight =
+                        TransitionInflater.from(this).inflateTransition(R.transition.slide_right);
+                getWindow().setEnterTransition(transitionSlideRight);
+                break;
+        }
 
         bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
         bookDescription.setTypeface(BooksApplication.LATO_REGULAR);
