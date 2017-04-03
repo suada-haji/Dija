@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +38,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     private BookListener listener;
     int rowLayout;
     Context context;
+    private int lastPosition = -1;
+
 
     public BooksAdapter(ArrayList<Book> bookArrayList, int rowLayout, Context context, BookListener listener) {
         this.books = bookArrayList;
@@ -41,6 +47,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
         this.context = context;
         this.listener = listener;
     }
+
+
 
     public static class BooksHolder extends RecyclerView.ViewHolder {
         TextView bookName;
@@ -104,6 +112,16 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
         }
     }
 
+    private void setAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            anim.setDuration(1000);
+            viewToAnimate.startAnimation(anim);
+            lastPosition = position;
+        }
+    }
+
     @Override
     public BooksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(rowLayout, parent, false);
@@ -112,6 +130,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
 
     @Override
     public void onBindViewHolder(BooksAdapter.BooksHolder holder, final int position) {
+        setAnimation(holder.itemView, position);
         holder.bind(books.get(position), listener);
     }
 

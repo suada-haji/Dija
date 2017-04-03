@@ -3,10 +3,9 @@ package com.example.suadahaji.dijaapplication.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,15 +20,11 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import static com.example.suadahaji.dijaapplication.ui.Transitions.EXTRA_TRANSITION;
-import static com.example.suadahaji.dijaapplication.ui.Transitions.TRANSITION_SLIDE_RIGHT;
-
 public class ListBooksActivity extends AppCompatActivity implements MainView, BooksAdapter.BookListener {
 
     private RecyclerView recyclerView;
     private PresenterImpl presenter;
     private BooksAdapter adapter;
-    private Book book;
 
     @Inject
     ApiManager apiManager;
@@ -54,9 +49,11 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     }
 
     private void setupRecyclerView() {
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(1000);
+        itemAnimator.setRemoveDuration(1000);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-       // recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
@@ -73,7 +70,7 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
 
     @Override
     public void showMessage(Book book) {
-        Toast.makeText(this, String.format("You clicked on %s",  book.getBookName()), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, String.format("You clicked on %s", book.getBookName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -91,11 +88,7 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
 
         Intent intent = new Intent(this, BookDetailActivity.class);
         intent.putExtra("currentBook", book);
-        intent.putExtra(
-                EXTRA_TRANSITION, TRANSITION_SLIDE_RIGHT);
-        Transitions transitions = new Transitions();
-        transitions.startActivityWithOptions(this, intent, this);
-        finish();
+        startActivity(intent);
     }
 
     @Override
@@ -111,7 +104,6 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
 
     @Override
     public void onBackPressed() {
-        finishAfterTransition();
         super.onBackPressed();
     }
 }
