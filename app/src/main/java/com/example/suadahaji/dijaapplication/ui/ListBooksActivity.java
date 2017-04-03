@@ -3,6 +3,7 @@ package com.example.suadahaji.dijaapplication.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,7 +25,6 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     private RecyclerView recyclerView;
     private PresenterImpl presenter;
     private BooksAdapter adapter;
-    private Book book;
 
     @Inject
     ApiManager apiManager;
@@ -44,11 +44,16 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
         presenter.attachedView(this);
 
         setupRecyclerView();
+
+
     }
 
     private void setupRecyclerView() {
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(1000);
+        itemAnimator.setRemoveDuration(1000);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -65,7 +70,7 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
 
     @Override
     public void showMessage(Book book) {
-        Toast.makeText(this, String.format("You clicked on %s",  book.getBookName()), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, String.format("You clicked on %s", book.getBookName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -83,8 +88,7 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
 
         Intent intent = new Intent(this, BookDetailActivity.class);
         intent.putExtra("currentBook", book);
-        this.startActivity(intent);
-        finish();
+        startActivity(intent);
     }
 
     @Override
@@ -96,5 +100,10 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     @Override
     public void onBookClicked(Book book) {
         presenter.onItemSelected(book);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

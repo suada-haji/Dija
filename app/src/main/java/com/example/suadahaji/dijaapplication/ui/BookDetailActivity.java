@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
 public class BookDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.book_detail_image)
@@ -83,7 +84,9 @@ public class BookDetailActivity extends AppCompatActivity {
                             @Override
                             public void onGenerated(Palette palette) {
                                 Palette.Swatch textSwatch = palette.getVibrantSwatch();
-                                fabCart.setBackgroundTintList(ColorStateList.valueOf(textSwatch.getRgb()));
+                                if (fabCart.getBackgroundTintList() != null) {
+                                    fabCart.setBackgroundTintList(ColorStateList.valueOf(textSwatch.getRgb()));
+                                }
                             }
                         });
             }
