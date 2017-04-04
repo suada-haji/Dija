@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * Created by suadahaji
  */
 
-public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>{
+public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder> {
     private static final String TAG = "BooksAdapter";
 
     private ArrayList<Book> books;
@@ -44,7 +44,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     }
 
 
-
     public static class BooksHolder extends RecyclerView.ViewHolder {
         TextView bookName;
         TextView bookDescription;
@@ -56,60 +55,59 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
         public BooksHolder(View itemView) {
             super(itemView);
             bookName = (TextView) itemView.findViewById(R.id.book_name);
-          //  bookDescription = (TextView) itemView.findViewById(R.id.book_description);
+            //  bookDescription = (TextView) itemView.findViewById(R.id.book_description);
             bookAuthor = (TextView) itemView.findViewById(R.id.book_author);
             bookImage = (ImageView) itemView.findViewById(R.id.book_image);
-           // bookPrice = (TextView) itemView.findViewById(R.id.book_price);
+            // bookPrice = (TextView) itemView.findViewById(R.id.book_price);
 
-         //   relativeLayout = (LinearLayout) itemView.findViewById(R.id.activity_list_books);
+            //   relativeLayout = (LinearLayout) itemView.findViewById(R.id.activity_list_books);
 
             bookName.setTypeface(BooksApplication.ROBOTO_MEDIUM);
-          //  bookDescription.setTypeface(BooksApplication.ROBOTO_REGULAR);
+            //  bookDescription.setTypeface(BooksApplication.ROBOTO_REGULAR);
             bookAuthor.setTypeface(BooksApplication.LATO_REGULAR);
-          //  bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
+            //  bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
         }
 
         public void bind(final Book book, final BookListener listener) {
             bookName.setText(book.getBookName());
-          //  bookDescription.setText(book.getBookDescription());
+            //  bookDescription.setText(book.getBookDescription());
             bookAuthor.setText("By " + book.getBookAuthor());
-          //  bookPrice.setText("$ " + Double.toString(book.getBookPrice()));
+            //  bookPrice.setText("$ " + Double.toString(book.getBookPrice()));
             Picasso.with(itemView.getContext())
                     .load(book.getBookImage())
                     .into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    assert bookImage != null;
-                    bookImage.setImageBitmap(bitmap);
-                    Palette.from(bitmap)
-                            .generate(new Palette.PaletteAsyncListener() {
-                                @Override
-                                public void onGenerated(Palette palette) {
-                                    Palette.Swatch backgroundColor = palette.getDarkMutedSwatch();
-                                   // relativeLayout.setBackgroundColor(backgroundColor.getRgb());
-                                }
-                            });
-                }
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            assert bookImage != null;
+                            bookImage.setImageBitmap(bitmap);
+                            Palette.from(bitmap)
+                                    .generate(new Palette.PaletteAsyncListener() {
+                                        @Override
+                                        public void onGenerated(Palette palette) {
+                                            Palette.Swatch backgroundColor = palette.getDarkMutedSwatch();
+                                            // relativeLayout.setBackgroundColor(backgroundColor.getRgb());
+                                        }
+                                    });
+                        }
 
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
 
-                }
+                        }
 
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
 
-                }
-            });
+                        }
+                    });
 
             ViewCompat.setTransitionName(bookImage, book.getBookName());
 
 
-
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     listener.onBookClicked(getAdapterPosition(), book, bookImage);
-                   // listener.onBookClicked(book);
                 }
             });
         }
@@ -133,8 +131,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
 
     @Override
     public void onBindViewHolder(BooksAdapter.BooksHolder holder, final int position) {
-        // setAnimation(holder.itemView, position);
+        setAnimation(holder.itemView, position);
         holder.bind(books.get(position), listener);
+
     }
 
     @Override
