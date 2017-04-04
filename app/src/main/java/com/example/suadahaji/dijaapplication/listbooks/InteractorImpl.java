@@ -57,6 +57,7 @@ public class InteractorImpl implements Interactor {
 
     @Override
     public void unbind() {
+        compositeSubscription.unsubscribe();
 
     }
 }

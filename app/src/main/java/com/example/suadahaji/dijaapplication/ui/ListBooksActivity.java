@@ -68,6 +68,20 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     }
 
     @Override
+    public void showProgressBar() {
+       findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+        findViewById(R.id.progress_bar).setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
     public void setBooks(ArrayList<Book> books) {
         adapter = new BooksAdapter(books, R.layout.book_list_view, this, this);
 
