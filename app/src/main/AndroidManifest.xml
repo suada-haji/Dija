@@ -24,11 +24,7 @@
         </activity>
         <activity android:name=".ui.ListBooksActivity" />
         <activity android:name=".ui.BookDetailActivity"
-            android:theme="@style/CustomTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ListBooksActivity"/>
-        </activity>
+            android:theme="@style/CustomTheme"/>
     </application>
 
 </manifest>

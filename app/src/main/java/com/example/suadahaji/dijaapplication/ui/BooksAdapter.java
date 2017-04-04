@@ -3,21 +3,16 @@ package com.example.suadahaji.dijaapplication.ui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.suadahaji.dijaapplication.R;
 import com.example.suadahaji.dijaapplication.dagger.BooksApplication;
@@ -79,7 +74,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
           //  bookDescription.setText(book.getBookDescription());
             bookAuthor.setText("By " + book.getBookAuthor());
           //  bookPrice.setText("$ " + Double.toString(book.getBookPrice()));
-            Picasso.with(itemView.getContext()).load(book.getBookImage()).into(new Target() {
+            Picasso.with(itemView.getContext())
+                    .load(book.getBookImage())
+                    .into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     assert bookImage != null;
@@ -104,9 +101,15 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
 
                 }
             });
+
+            ViewCompat.setTransitionName(bookImage, book.getBookName());
+
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    listener.onBookClicked(book);
+                    listener.onBookClicked(getAdapterPosition(), book, bookImage);
+                   // listener.onBookClicked(book);
                 }
             });
         }
@@ -130,7 +133,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
 
     @Override
     public void onBindViewHolder(BooksAdapter.BooksHolder holder, final int position) {
-        setAnimation(holder.itemView, position);
+        // setAnimation(holder.itemView, position);
         holder.bind(books.get(position), listener);
     }
 
@@ -140,6 +143,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
     }
 
     public interface BookListener {
-        void onBookClicked(Book book);
+        void onBookClicked(int pos, Book book, ImageView shareImageView);
     }
 }

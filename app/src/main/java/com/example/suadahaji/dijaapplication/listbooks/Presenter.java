@@ -1,5 +1,7 @@
 package com.example.suadahaji.dijaapplication.listbooks;
 
+import android.widget.ImageView;
+
 import com.example.suadahaji.dijaapplication.models.Book;
 
 /**
@@ -13,5 +15,5 @@ public interface Presenter <V> {
 
     void onResume();
 
-    void onItemSelected(Book book);
+    void onItemSelected(int pos, Book book, ImageView sharedImageView);
 }

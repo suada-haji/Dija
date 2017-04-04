@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.suadahaji.dijaapplication.R;
 import com.example.suadahaji.dijaapplication.dagger.BooksApplication;
 import com.example.suadahaji.dijaapplication.models.Book;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -31,11 +33,8 @@ public class BookDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.back_button)
     void previousActivity() {
-        Intent intent = new Intent(BookDetailActivity.this, ListBooksActivity.class);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
-
     @BindView(R.id.fab_cart)
     FloatingActionButton fabCart;
 
@@ -72,13 +71,23 @@ public class BookDetailActivity extends AppCompatActivity {
         bookDate.setTypeface(BooksApplication.LATO_BOLD);
         bookAuthor.setTypeface(BooksApplication.LATO_LIGHT);
 
-        Book book = getIntent().getParcelableExtra("currentBook");
+        Bundle extras = getIntent().getExtras();
+        Book book = extras.getParcelable(ListBooksActivity.EXTRA_BOOK_ITEM);
 
-        Picasso.with(this).load(book.getBookImage()).into(new Target() {
+        String bookImageUrl = book.getBookImage();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            String imageTransitionName = extras.getString(ListBooksActivity.EXTRA_BOOK_IMAGE_TRANSITION_NAME);
+            bookImage.setTransitionName(imageTransitionName);
+        }
+
+        Picasso.with(this)
+                .load(bookImageUrl)
+                .into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                assert  bookImage != null;
                 bookImage.setImageBitmap(bitmap);
+                supportStartPostponedEnterTransition();
                 Palette.from(bitmap)
                         .generate(new Palette.PaletteAsyncListener() {
                             @Override
@@ -93,15 +102,16 @@ public class BookDetailActivity extends AppCompatActivity {
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
+                supportStartPostponedEnterTransition();
 
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
+                supportStartPostponedEnterTransition();
 
             }
         });
-
 
         bookPrice.setText(getString(R.string.price_annotate) + Double.toString(book.getBookPrice()));
         bookDescription.setText(book.getBookDescription());
@@ -111,25 +121,4 @@ public class BookDetailActivity extends AppCompatActivity {
 
         fabCart.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
     }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // It will close current activity and return to previous
-                startActivity(new Intent(this, ListBooksActivity.class));
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(BookDetailActivity.this, ListBooksActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
 }

@@ -1,5 +1,7 @@
 package com.example.suadahaji.dijaapplication.listbooks;
 
+import android.widget.ImageView;
+
 import com.example.suadahaji.dijaapplication.api.ApiManager;
 import com.example.suadahaji.dijaapplication.models.Book;
 
@@ -24,9 +26,7 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
         if (view == null) {
             throw new IllegalArgumentException("You can't set a null view");
         }
-
         mainView = view;
-
     }
 
     @Override
@@ -41,10 +41,9 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
     }
 
     @Override
-    public void onItemSelected(Book book) {
-        mainView.navigateToHome(book);
+    public void onItemSelected(int pos, Book book, ImageView sharedImageView) {
+        mainView.navigateToHome(pos, book, sharedImageView);
     }
-
 
     @Override
     public void onFinished(ArrayList<Book> books) {
@@ -54,13 +53,10 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
     @Override
     public void displayErrorState() {
         mainView.showErrorMessage();
-
     }
 
     @Override
     public void displayEmptyState() {
         mainView.showEmptyStateMessage();
     }
-
-
 }
