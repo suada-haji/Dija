@@ -25,7 +25,7 @@
             diagonal:diagonal_direction="left"
             diagonal:diagonal_position="bottom">
 
-            <com.flaviofaria.kenburnsview.KenBurnsView
+            <ImageView
 
                 android:id="@+id/book_detail_image"
                 android:layout_width="match_parent"

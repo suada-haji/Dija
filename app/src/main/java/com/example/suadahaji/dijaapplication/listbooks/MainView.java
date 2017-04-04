@@ -1,5 +1,7 @@
 package com.example.suadahaji.dijaapplication.listbooks;
 
+import android.widget.ImageView;
+
 import com.example.suadahaji.dijaapplication.models.Book;
 
 import java.util.ArrayList;
@@ -12,11 +14,10 @@ public interface MainView {
 
     void setBooks(ArrayList<Book> books);
 
-    void showMessage(Book book);
 
     void showErrorMessage();
 
     void showEmptyStateMessage();
 
-    void navigateToHome(Book book);
+    void navigateToHome(int pos, Book book, ImageView imageView);
 }
