@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class PresenterImpl implements Presenter<MainView>, LoadListener {
 
-
     private MainView mainView;
     private InteractorImpl interactor;
 
@@ -37,6 +36,7 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
 
     @Override
     public void onStart() {
+        mainView.showProgressBar();
         interactor.loadItems();
     }
 
@@ -48,15 +48,18 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
     @Override
     public void onFinished(ArrayList<Book> books) {
         mainView.setBooks(books);
+        mainView.hideProgressBar();
     }
 
     @Override
     public void displayErrorState() {
         mainView.showErrorMessage();
+        mainView.hideProgressBar();
     }
 
     @Override
     public void displayEmptyState() {
         mainView.showEmptyStateMessage();
+        mainView.hideProgressBar();
     }
 }

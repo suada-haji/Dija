@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 public interface MainView {
 
+    void showProgressBar();
+
+    void hideProgressBar();
+
     void setBooks(ArrayList<Book> books);
 
 
