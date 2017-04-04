@@ -13,7 +13,7 @@ public interface Presenter <V> {
 
     void detachView();
 
-    void onResume();
+    void onStart();
 
     void onItemSelected(int pos, Book book, ImageView sharedImageView);
 }

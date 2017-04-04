@@ -36,7 +36,7 @@ public class PresenterImpl implements Presenter<MainView>, LoadListener {
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         interactor.loadItems();
     }
 

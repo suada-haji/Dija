@@ -49,6 +49,8 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
         presenter.attachedView(this);
 
         setupRecyclerView();
+
+        presenter.onStart();
     }
 
     private void setupRecyclerView() {
@@ -63,12 +65,12 @@ public class ListBooksActivity extends AppCompatActivity implements MainView, Bo
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume();
     }
 
     @Override
     public void setBooks(ArrayList<Book> books) {
         adapter = new BooksAdapter(books, R.layout.book_list_view, this, this);
+
         recyclerView.setAdapter(adapter);
     }
 
