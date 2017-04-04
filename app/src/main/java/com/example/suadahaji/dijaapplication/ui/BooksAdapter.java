@@ -108,6 +108,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksHolder>
                 @Override
                 public void onClick(View v) {
                     listener.onBookClicked(getAdapterPosition(), book, bookImage);
+                    // listener.onBookClicked(book);
                 }
             });
         }

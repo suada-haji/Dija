@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.graphics.Palette;
+import android.transition.Transition;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,7 +64,37 @@ public class BookDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
+
         ButterKnife.bind(this);
+
+        final Transition fade = getWindow().getEnterTransition();
+        fade.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                fabCart.animate().scaleX(1f).scaleY(1f);
+                fade.removeListener(this);
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+
+            }
+        });
 
         bookPrice.setTypeface(BooksApplication.LATO_REGULAR);
         bookDescription.setTypeface(BooksApplication.LATO_REGULAR);
@@ -120,5 +152,18 @@ public class BookDetailActivity extends AppCompatActivity {
         bookAuthor.setText(getString(R.string.author_annotate) + book.getBookAuthor());
 
         fabCart.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        fabCart.animate().scaleX(0f).scaleY(0f)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        finishAfterTransition();
+                    }
+                });
+
     }
 }
